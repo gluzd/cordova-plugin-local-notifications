@@ -182,15 +182,20 @@
  * @param id
  *      Notification ID
  */
-- (UILocalNotification*) localNotificationWithId:(NSNumber*)id
+- (UILocalNotification*) localNotificationWithId:(NSNumber*)numId
 {
     NSArray* notifications = self.localNotifications;
 
     for (UILocalNotification* notification in notifications)
     {
-        if ([notification.options.id isEqualToNumber:id]) {
+        id objID = notification.options.id;
+        BOOL notificationHasID = true;
+        
+        notificationHasID = [numId isKindOfClass:[NSNumber class]];
+        
+        if(notificationHasID && [objID isEqualToNumber:numId])
             return notification;
-        }
+        
     }
 
     return NULL;
